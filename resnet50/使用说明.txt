@@ -1,0 +1,83 @@
+#运行环境安装
+pip install -r requirements.txt
+#正常训练流程
+1_split.py 为第一个正常需要运行的程序 主要用来分割数据集和测试集 原数据都在ori_data里 每次修改数据集 需要删除data文件夹
+2_ResNet50.py 为第二个正常需要运行的程序 主要就是训练模型 保存模型到models下 训练结果保存到 results.png
+3_verification.py 为第三个正常需要运行的程序 主要是验证训练模型的正确性 热力图结果保存在 heatmap.png
+4_pred_qt.py 为第四个正常需要运行的程序 主要是具体使用模型的小程序 pyqt制作
+#直接使用流程
+运行 4_pred_qt.py 即可 选择需要预测的图片即可
+self.class_names =['Apple', 'Apricot', 'Banana', 'Blueberry', 'Cherry', 'Grape', 'Peach', 'Pear', 'Pineapple', 'Watermole']
+根据下面训练过程打印的列表得来的训练其他模型的时候需要修改
+
+
+训练主要看accuracy 最好要到1  保证训练率满  最后考察val_accuracy 知道分类正确率具体情况
+下方为训练过程控制台打印
+python 2_ResNet50.py
+——————————————————————————————————
+C:\Users\zlf\Anaconda3\python.exe D:/python/study/cnn/resnet/ResNet50/2_ResNet50.py
+2022-08-13 15:04:51.087042: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cudart64_110.dll'; dlerror: cudart64_110.dll not found
+2022-08-13 15:04:51.087185: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+C:\Users\zlf\AppData\Roaming\Python\Python37\site-packages\pandas\compat\_optional.py:138: UserWarning: Pandas requires version '2.7.0' or newer of 'numexpr' (version '2.6.9' currently installed).
+  warnings.warn(msg, UserWarning)
+Found 11436 files belonging to 10 classes.
+2022-08-13 15:04:56.054368: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'nvcuda.dll'; dlerror: nvcuda.dll not found
+2022-08-13 15:04:56.054504: W tensorflow/stream_executor/cuda/cuda_driver.cc:269] failed call to cuInit: UNKNOWN ERROR (303)
+2022-08-13 15:04:56.058414: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: DESKTOP-QB48DHA
+2022-08-13 15:04:56.058610: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: DESKTOP-QB48DHA
+2022-08-13 15:04:56.058970: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Found 4893 files belonging to 10 classes.
+['Apple', 'Apricot', 'Banana', 'Blueberry', 'Cherry', 'Grape', 'Peach', 'Pear', 'Pineapple', 'Watermole']
+Model: "sequential"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #
+=================================================================
+ rescaling (Rescaling)       (None, 224, 224, 3)       0
+
+ resnet50v2 (Functional)     (None, 7, 7, 2048)        23564800
+
+ global_average_pooling2d (G  (None, 2048)             0
+ lobalAveragePooling2D)
+
+ dense (Dense)               (None, 10)                20490
+
+=================================================================
+Total params: 23,585,290
+Trainable params: 20,490
+Non-trainable params: 23,564,800
+_________________________________________________________________
+Epoch 1/15
+715/715 [==============================] - 499s 696ms/step - loss: 0.1490 - accuracy: 0.9662 - val_loss: 0.0225 - val_accuracy: 0.9992
+Epoch 2/15
+715/715 [==============================] - 496s 694ms/step - loss: 0.0136 - accuracy: 0.9996 - val_loss: 0.0087 - val_accuracy: 1.0000
+Epoch 3/15
+715/715 [==============================] - 485s 679ms/step - loss: 0.0058 - accuracy: 1.0000 - val_loss: 0.0048 - val_accuracy: 1.0000
+Epoch 4/15
+715/715 [==============================] - 488s 683ms/step - loss: 0.0032 - accuracy: 1.0000 - val_loss: 0.0030 - val_accuracy: 1.0000
+Epoch 5/15
+715/715 [==============================] - 489s 684ms/step - loss: 0.0019 - accuracy: 1.0000 - val_loss: 0.0020 - val_accuracy: 1.0000
+Epoch 6/15
+715/715 [==============================] - 488s 683ms/step - loss: 0.0013 - accuracy: 1.0000 - val_loss: 0.0014 - val_accuracy: 1.0000
+Epoch 7/15
+715/715 [==============================] - 490s 686ms/step - loss: 8.4636e-04 - accuracy: 1.0000 - val_loss: 9.6548e-04 - val_accuracy: 1.0000
+Epoch 8/15
+715/715 [==============================] - 494s 691ms/step - loss: 5.8953e-04 - accuracy: 1.0000 - val_loss: 6.8669e-04 - val_accuracy: 1.0000
+Epoch 9/15
+715/715 [==============================] - 497s 696ms/step - loss: 3.9941e-04 - accuracy: 1.0000 - val_loss: 5.1479e-04 - val_accuracy: 1.0000
+Epoch 10/15
+715/715 [==============================] - 494s 691ms/step - loss: 2.8365e-04 - accuracy: 1.0000 - val_loss: 3.7178e-04 - val_accuracy: 1.0000
+Epoch 11/15
+715/715 [==============================] - 503s 704ms/step - loss: 1.9914e-04 - accuracy: 1.0000 - val_loss: 2.7395e-04 - val_accuracy: 1.0000
+Epoch 12/15
+715/715 [==============================] - 518s 725ms/step - loss: 1.3936e-04 - accuracy: 1.0000 - val_loss: 2.0600e-04 - val_accuracy: 1.0000
+Epoch 13/15
+715/715 [==============================] - 500s 700ms/step - loss: 1.0074e-04 - accuracy: 1.0000 - val_loss: 1.6095e-04 - val_accuracy: 1.0000
+Epoch 14/15
+715/715 [==============================] - 538s 752ms/step - loss: 7.1688e-05 - accuracy: 1.0000 - val_loss: 1.1403e-04 - val_accuracy: 1.0000
+Epoch 15/15
+715/715 [==============================] - 505s 707ms/step - loss: 5.0633e-05 - accuracy: 1.0000 - val_loss: 8.7939e-05 - val_accuracy: 1.0000
+该循环程序运行时间： 7488.73573756218 s
+
+进程已结束，退出代码 0
+

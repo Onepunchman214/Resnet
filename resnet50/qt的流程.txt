@@ -1,0 +1,6 @@
+1.import tensorflow.keras.models as models 导入TensorFlow的模型from PyQt5  import * 导入pyqt图形库 import cv2 导入opencv
+2.创建MainWindow对象 继承QTabWidget对象  初始化setWindowIcon设置程序icon setWindowTitle设置程序标题 model制定加载模型 class_names制定对应的分类标签 resize切换大小
+3.界面初始化，设置界面布局 font设置楷体 大小为15 QWidget主页面，设置组件并在组件放在布局上 QVBoxLayout布局对象进行布局
+cv2.imread方法读取选择的图片
+4.change_img方法上传选择的图片通过 cv2.imread cv2.resize setPixmap 方法展示图片
+5.Image.open打开图片 model.predict预测图片 class_names匹配上结果 后返回打result标签
