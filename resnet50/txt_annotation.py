@@ -1,3 +1,4 @@
+from dataclasses import replace
 import os
 from os import getcwd
 
@@ -25,7 +26,7 @@ for se in sets:
             _, postfix = os.path.splitext(photo_name)
             if postfix not in ['.jpg', '.png', '.jpeg']:
                 continue
-            list_file.write(str(cls_id) + ";" + '%s/%s'%(wd, os.path.join(photos_path, photo_name)))
+            list_file.write(str(cls_id) + ";" + '%s/%s'%(wd, os.path.join(photos_path, photo_name.replace(" ",""))))
             list_file.write('\n')
     list_file.close()
 

@@ -26,7 +26,7 @@ def fit_one_epoch(net,epoch,epoch_size,epoch_size_val,gen,genval,Epoch,cuda):
     total_accuracy = 0
     
     val_total_accuracy = 0
-    val_toal_loss = 0
+    val_toal_loss = 0   
     with tqdm(total=epoch_size,desc=f'Epoch {epoch + 1}/{Epoch}',postfix=dict,mininterval=0.3) as pbar:
         for iteration, batch in enumerate(gen):
             if iteration >= epoch_size: 
